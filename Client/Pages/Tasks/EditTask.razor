@@ -1,12 +1,13 @@
 @page "/tasks/edit/{TaskId}"
 
-<div class="pt-1">
-    <h2>Edit task</h2>
-    <TaskForm/>
-</div>
-
-@code{
-
-    [Parameter] 
-    public string TaskId { get; set; }
+@if(task == null){
+    <LoadingSpinner>
+        Loading...
+    </LoadingSpinner>
+}
+else{
+    <div class="pt-1">
+        <h2>Edit task - @task.Title</h2>
+        <TaskForm TaskModel="task" OnValidSubmit="UpdateTask"/>
+    </div>
 }

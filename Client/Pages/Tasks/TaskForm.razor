@@ -1,0 +1,29 @@
+<EditForm Model="@TaskModel" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator/>
+
+    <div class="form-group">
+        <label for="txtTitle">Title</label>
+        <InputText @bind-Value="@TaskModel.Title" class="form-control" id="txtTitle"/>
+        <ValidationMessage For="@(()=>TaskModel.Title)"/>        
+    </div>  
+    <div class="form-group">
+        <label for="txtDescription">Description</label>
+        <InputTextArea @bind-Value="@TaskModel.Description" rows="5" class="form-control" id="txtDescription"/>
+        <ValidationMessage For="@(()=>TaskModel.Description)"/>
+        <small class="form-text text-muted">Optional description.</small>
+    </div>  
+    <div class="form-group">
+        <label for="txtDueDate">Due Date</label>
+        <InputDate @bind-Value="@TaskModel.DueDate" class="form-control" id="txtDueDate"/>
+        <ValidationMessage For="@(()=>TaskModel.DueDate)"/>
+        <small class="form-text text-muted">Optional due date.</small>
+    </div>   
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</EditForm>
+
+@code{
+    [Parameter] public TaskModel TaskModel { get; set; }
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}

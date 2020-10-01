@@ -1,4 +1,4 @@
-﻿using Shared = BlazorTasks.Shared;
+﻿using BlazorTasks.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,7 @@ namespace BlazorTasks.Server.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Shared.Task> Get()
+        public IEnumerable<TaskModel> Get()
         {
             return _tasksRepository.GetTasks();
         }
@@ -40,13 +40,13 @@ namespace BlazorTasks.Server.Controllers
         }
 
         [HttpPost]
-        public Shared.Task Add([FromBody] Shared.Task task)
+        public TaskModel Add([FromBody] TaskModel task)
         {
             return _tasksRepository.AddTask(task);
         }
 
         [HttpPut]
-        public void Update([FromBody] Shared.Task task)
+        public void Update([FromBody] TaskModel task)
         {
             _tasksRepository.UpdateTask(task);
         }

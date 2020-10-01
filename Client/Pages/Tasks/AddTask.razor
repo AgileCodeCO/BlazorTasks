@@ -1,6 +1,20 @@
 @page "/tasks/add"
 
+@inject ITasksService _taskService
+@inject NavigationManager _navManager
+
 <div class="pt-1">
     <h2>Add a task</h2>
-    <TaskForm/>
+    <TaskForm TaskModel="task" OnValidSubmit="CreateTask"/>
 </div>
+
+@code{
+    private TaskModel task = new TaskModel();
+
+    public async Task CreateTask()
+    {
+        await _taskService.AddTask(task);
+        _navManager.NavigateTo("tasks");
+    }
+
+}

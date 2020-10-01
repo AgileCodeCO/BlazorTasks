@@ -7,8 +7,8 @@ namespace BlazorTasks.Server.Repositories
 {
     public class TasksRepository : ITasksRepository
     {
-        private List<Task> _currentTasks = new List<Task>();
-        public Task AddTask(Task task)
+        private List<TaskModel> _currentTasks = new List<TaskModel>();
+        public TaskModel AddTask(TaskModel task)
         {
             string taskId = Guid.NewGuid().ToString().ToUpper();
             task.TaskId = taskId;
@@ -24,17 +24,17 @@ namespace BlazorTasks.Server.Repositories
             _currentTasks.RemoveAll(t => t.TaskId == taskId);
         }
 
-        public Task GetTask(string taskId)
+        public TaskModel GetTask(string taskId)
         {
             return _currentTasks.FirstOrDefault(t => t.TaskId == taskId);
         }
 
-        public IEnumerable<Task> GetTasks()
+        public IEnumerable<TaskModel> GetTasks()
         {
             return _currentTasks;
         }
 
-        public void UpdateTask(Task task)
+        public void UpdateTask(TaskModel task)
         {
             var taskToUpdate = _currentTasks.FirstOrDefault(t => t.TaskId == task.TaskId);
             if (taskToUpdate == null)

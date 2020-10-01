@@ -1,3 +1,30 @@
 @page "/tasks"
 
-<TasksList/>
+@inject ITasksService _tasksService
+
+@if(TaskItems == null){
+    <LoadingSpinner>
+        Loading...
+    </LoadingSpinner>
+}
+else{
+    <TasksList TaskItems="TaskItems" OnRefreshRequested="RefreshTasks" />
+}
+
+@code{
+    [Parameter] public IEnumerable<TaskModel> TaskItems { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+       await LoadTasks();
+    }
+
+    public async Task RefreshTasks()
+    {
+        await LoadTasks();
+    }
+
+    private async Task LoadTasks(){
+         TaskItems = await _tasksService.GetTasks(false);
+    }
+}  
