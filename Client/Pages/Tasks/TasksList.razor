@@ -1,4 +1,5 @@
 @inject ITasksService _tasksService
+@inject IJSRuntime _js;
 
 @if(!TaskItems.Any())
 {
@@ -62,7 +63,15 @@ else
 
       public async Task DeleteTask(TaskModel task)
       {
-          await _tasksService.DeleteTask(task.TaskId);
+          TaskIdToDelete = task.TaskId;
+          await _js.InvokeVoidAsync("showConfirmDialog", "Are you sure?", "DeleteTaskConfirmed", DotNetObjectReference.Create(this));
+      }
+
+      private string TaskIdToDelete{ get; set; }
+
+      [JSInvokable]
+      public async Task DeleteTaskConfirmed(){
+          await _tasksService.DeleteTask(TaskIdToDelete);
           await RequestRefresh();
       }
 
