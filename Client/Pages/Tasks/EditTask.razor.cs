@@ -23,7 +23,7 @@ namespace BlazorTasks.Client.Pages.Tasks
         public async Task UpdateTask()
         {
             await _taskService.UpdateTask(task);
-            _navManager.NavigateTo("tasks");
+            _navManager.NavigateTo("mytasks");
         }
     }
 }

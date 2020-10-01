@@ -1,4 +1,4 @@
-@page "/tasks/add"
+@page "/mytasks/add"
 
 @inject ITasksService _taskService
 @inject NavigationManager _navManager
@@ -14,7 +14,7 @@
     public async Task CreateTask()
     {
         await _taskService.AddTask(task);
-        _navManager.NavigateTo("tasks");
+        _navManager.NavigateTo("mytasks");
     }
 
 }

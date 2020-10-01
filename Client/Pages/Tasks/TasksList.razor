@@ -40,7 +40,7 @@ else
           <td style="width:40px">
             @if(!task.IsCompleted)
             {
-              <a href="/tasks/edit/@task.TaskId" title="Edit" class="text-primary"><span class="oi oi-pencil" aria-hidden="true"></span></a>
+              <a href="/mytasks/edit/@task.TaskId" title="Edit" class="text-primary"><span class="oi oi-pencil" aria-hidden="true"></span></a>
             }
               <a href="javascript:;" @onclick="(()=>DeleteTask(task))" title="Remove" class="text-danger"><span class="oi oi-delete" aria-hidden="true"></span></a>
           </td>
