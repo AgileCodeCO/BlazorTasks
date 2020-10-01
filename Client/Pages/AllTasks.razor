@@ -14,11 +14,6 @@ else{
 @code{
     [Parameter] public IEnumerable<TaskModel> TaskItems { get; set; }
 
-    protected override async Task OnInitializedAsync()
-    {
-       await LoadTasks();
-    }
-
     public async Task RefreshTasks()
     {
         await LoadTasks();
@@ -27,4 +22,10 @@ else{
     private async Task LoadTasks(){
          TaskItems = await _tasksService.GetTasks(false);
     }
+
+    protected override async Task OnInitializedAsync()
+    {
+       await LoadTasks();
+    }
+
 }  

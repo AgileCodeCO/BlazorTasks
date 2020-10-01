@@ -51,9 +51,15 @@ else
 </div>
 }
 @code{
-  [Parameter] public IEnumerable<TaskModel> TaskItems { get; set; }
-
+      [Parameter] public IEnumerable<TaskModel> TaskItems { get; set; }
       [Parameter] public EventCallback OnRefreshRequested { get; set; }
+
+      private async Task RequestRefresh()
+      {
+          if (OnRefreshRequested.HasDelegate)
+              await OnRefreshRequested.InvokeAsync(null);
+      }
+
       public async Task UpdateTaskStatus(TaskModel task, bool completed)
       {
           task.IsCompleted = completed;
@@ -75,9 +81,4 @@ else
           await RequestRefresh();
       }
 
-      private async Task RequestRefresh()
-      {
-          if (OnRefreshRequested.HasDelegate)
-              await OnRefreshRequested.InvokeAsync(null);
-      }
 }
